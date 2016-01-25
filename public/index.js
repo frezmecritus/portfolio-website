@@ -17,8 +17,8 @@ var Canvas = React.createClass({
 		return <div>
 			<div id="header">
 				<div id="logo">
-					<a onClick={this.resetPage}>Eileen Hung</a>
-					<p className="logo-subtitle">"The shortest distance between truth and a human being is a story."</p>
+					<a onClick={this.resetPage}>Ling-Ting Tseng</a>
+					<p className="logo-subtitle">Portfolio</p>
 				</div>
 				{this.renderNav()}
 			</div>
@@ -30,11 +30,9 @@ var Canvas = React.createClass({
 	},
 
 	renderNav: function() {
-		var currPage = this.state.currPage;
 		var items = this.state.pages.map(function(page, i) {
-			var isCurrPage = page === currPage;
-			return <a className={isCurrPage? "currPage":""} 
-			          key={page} onClick={this.setPage}>{page}</a>;
+			var isCurrPage = page === this.state.currPage;
+			return <a className={isCurrPage? "currPage":""} key={page} onClick={this.setPage}>{page}</a>;
 		}.bind(this));
 		return <div id="topNav"> {items} </div>;
 	},	
@@ -43,81 +41,64 @@ var Canvas = React.createClass({
 		var res;
 		var page = this.state.currPage;
 		if (page=="WORK")
-			res = <Work />;
+			res = <div><div>
+				<a><img src="image/img1.png"></img><div>Accident Prediction</div></a>
+				<a><img src="image/img4.png"></img><div>Particle Systems</div></a>
+				<a><img src="image/img3.png"></img><div>Geospatial Data Visualization</div></a>
+			</div><div>
+				<a><img src="image/img7.png"></img><div>Big Lake Buoy</div></a>
+				<a><img src="image/img5.png"></img><div>Smart Pill Cap</div></a>
+				<a><img src="image/img6.png"></img><div>Power Hour</div></a>
+			</div><div>
+				<a><img src="image/img2.png"></img><div>Flying Airplane Navigation</div></a>
+				<a><img src="image/img8.png"></img><div>Le Petite Chef</div></a>
+				<a><img src="image/img9.png"></img><div>Order Independent Transparency</div></a>
+			</div></div>;
 		else if (page=="ABOUT")
-			res = <About />;
+			res = <TodoList />;
 		else
-			res = <Content />;
-		return res;
+			res = <p>Content</p>;
+		return <section id="content"> {res} </section>;
 	},
 
 	renderFooter: function() {
-		return <div id="footer"> Designed and developed by frezmecritus @2015 </div>;
-	}
-});
-
-var Work = React.createClass({
-	render: function() {
-		return <section id="content">
-			<div>
-				<a><img src="image/img1.jpg"></img><div>fsfwef</div></a>
-				<a><img src="image/img2.jpg"></img><div>sefdae</div></a>
-				<a><img src="image/img3.jpg"></img><div>ghftgq</div></a>
-			</div>
-			<div>
-				<a><img src="image/img4.jpg"></img><div>asddyi</div></a>
-			</div>
-		</section>;
-	}
-});
-
-var About = React.createClass({
-	render: function() {
-		return <section id="content">
-			<p>about</p>
-			<TodoList />
-		</section>;
+		var author = <a href="https://github.com/frezmecritus/">frezmecritus</a>
+		return <div id="footer"> Designed and developed by {author} @2016 </div>;
 	}
 });
 
 var TodoList = React.createClass({
 	getInitialState: function() {
-		return {items: ['hello', 'world', 'click', 'me']};
+		return {items: ['hello', 'world', 'click', 'me'], showed: false};
 	},
-	handleAdd: function() {
-		var newItems =
-			this.state.items.concat([prompt('Enter some text')]);
-		this.setState({items: newItems});
-	},
-	handleRemove: function(i) {
-		var newItems = this.state.items.slice();
-		newItems.splice(i, 1);
-		this.setState({items: newItems});
+
+	handleClick: function(i) {
+		if (this.state.showed) {
+			var newItems = this.state.items.slice();
+			newItems.splice(newItems.length-1, 1);
+			this.setState({items: newItems, showed: false});
+		}
+		else {
+			var newItems = this.state.items.concat(['dsfsfd']);
+			this.setState({items: newItems, showed: true});
+		}
 	},
 	render: function() {
-		var items = this.state.items.map(function(item, i) {
+		var items = (<div key='Hello' onClick={this.handleClick}>Hello</div>);
+		var items2 = this.state.items.map(function(item, i) {
 			return (
-				<div key={item} onClick={this.handleRemove.bind(this, i)}>
+				<div key={item} onClick={this.handleClick.bind(this, i)}>
 					{item}
 				</div>
 			);
 		}.bind(this));
 		return (
 			<div>
-				<button onClick={this.handleAdd}>Add Item</button>
-				<ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
-					{items}
+				<ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionAppearTimeout={500}>
+					<img src="image/img1.png"></img>
 				</ReactCSSTransitionGroup>
 			</div>
 		);
-	}
-});
-
-var Content = React.createClass({
-	render: function() {
-		return <section id="content">
-			<p>Content</p>
-		</section>;
 	}
 });
 
