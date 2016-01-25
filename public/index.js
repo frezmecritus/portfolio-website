@@ -60,12 +60,12 @@ var Work = React.createClass({
 	render: function() {
 		return <section id="content">
 			<div>
-				<a><img src="image/img1"></img><div>fsfwef</div></a>
-				<a><img src="image/img2"></img><div>sefdae</div></a>
-				<a><img src="image/img3"></img><div>ghftgq</div></a>
+				<a><img src="image/img1.jpg"></img><div>fsfwef</div></a>
+				<a><img src="image/img2.jpg"></img><div>sefdae</div></a>
+				<a><img src="image/img3.jpg"></img><div>ghftgq</div></a>
 			</div>
 			<div>
-				<a><img src="image/img4"></img><div>asddyi</div></a>
+				<a><img src="image/img4.jpg"></img><div>asddyi</div></a>
 			</div>
 		</section>;
 	}
@@ -105,7 +105,7 @@ var TodoList = React.createClass({
 		return (
 			<div>
 				<button onClick={this.handleAdd}>Add Item</button>
-				<ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+				<ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
 					{items}
 				</ReactCSSTransitionGroup>
 			</div>
