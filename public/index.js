@@ -2,7 +2,7 @@ var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup
 
 var Canvas = React.createClass({
 	getInitialState: function() {
-		return { pages: ['WORK', 'ABOUT', 'PRESS', 'CONTACT'], currPage: "WORK" };
+		return { pages: ['WORK', 'ABOUT', 'CONTACT'], currPage: "WORK"};
 	},
 
 	setPage: function(e) {
@@ -14,11 +14,12 @@ var Canvas = React.createClass({
 	},
 
 	render: function() {
+		var subTitle = 'Northwestern CS, Full-stack generalist';
 		return <div>
 			<div id="header">
 				<div id="logo">
 					<a onClick={this.resetPage}>Ling-Ting Tseng</a>
-					<p className="logo-subtitle">Portfolio</p>
+					<p className="logo-subtitle">{subTitle}</p>
 				</div>
 				{this.renderNav()}
 			</div>
@@ -42,20 +43,20 @@ var Canvas = React.createClass({
 		var page = this.state.currPage;
 		if (page=="WORK")
 			res = <div><div>
-				<a><img src="image/img1.png"></img><div>Accident Prediction</div></a>
-				<a><img src="image/img4.png"></img><div>Particle Systems</div></a>
+				<a><img src="image/img1.png"></img><div>Street Accidents Prediction</div></a>
+				<a><img src="image/img4.png"></img><div>WebGL Physics Simulation System</div></a>
 				<a><img src="image/img3.png"></img><div>Geospatial Data Visualization</div></a>
 			</div><div>
 				<a><img src="image/img7.png"></img><div>Big Lake Buoy</div></a>
-				<a><img src="image/img5.png"></img><div>Smart Pill Cap</div></a>
+				<a><img src="image/img5.png"></img><div>Medicare Service Platform</div></a>
 				<a><img src="image/img6.png"></img><div>Power Hour</div></a>
 			</div><div>
 				<a><img src="image/img2.png"></img><div>Flying Airplane Navigation</div></a>
 				<a><img src="image/img8.png"></img><div>Le Petite Chef</div></a>
-				<a><img src="image/img9.png"></img><div>Order Independent Transparency</div></a>
+				<a><img src="image/img9.png"></img><div>OpenGL Transparency</div></a>
 			</div></div>;
 		else if (page=="ABOUT")
-			res = <TodoList />;
+			res = <About />;
 		else
 			res = <p>Content</p>;
 		return <section id="content"> {res} </section>;
@@ -64,6 +65,13 @@ var Canvas = React.createClass({
 	renderFooter: function() {
 		var author = <a href="https://github.com/frezmecritus/">frezmecritus</a>
 		return <div id="footer"> Designed and developed by {author} @2016 </div>;
+	}
+});
+
+var About = React.createClass({
+	render: function() {
+		var par1 = 'I am interested in interactive design, computer graphic, geospatial data usage, with multiple projects on each of them. I have launched a marketplace in my senior year.';
+		return <p>{par1}</p>
 	}
 });
 
