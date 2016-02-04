@@ -14,7 +14,7 @@ var Canvas = React.createClass({
 	},
 
 	render: function() {
-		var subTitle = 'Northwestern CS, Full-stack generalist';
+		var subTitle = 'Northwestern CS, Frontend and Backend generalist';
 		return <div>
 			<div id="header">
 				<div id="logo">
@@ -58,7 +58,7 @@ var Canvas = React.createClass({
 		else if (page=="ABOUT")
 			res = <About />;
 		else
-			res = <p>Content</p>;
+			res = <Contact />;
 		return <section id="content"> {res} </section>;
 	},
 
@@ -70,8 +70,31 @@ var Canvas = React.createClass({
 
 var About = React.createClass({
 	render: function() {
-		var par1 = 'I am interested in interactive design, computer graphic, geospatial data usage, with multiple projects on each of them. I have launched a marketplace in my senior year.';
-		return <p>{par1}</p>
+		var head1 = 'WHAT I DO';
+		var par1 = 'I am interested in frontend development, interactive design, computer graphic, geospatial data usage, with multiple projects on each of them. I have launched a marketplace in my senior year.';
+		var head2 = 'ACHIEVEMENTS';
+		var par2 = 'Chirpy, a campus event website my friends and I launched at 2012, has achieved more than 1000 viewers per day. It was also the official campus event website of several colleges in Taiwan.';
+		var head3 = 'SKILLS';
+		var par3 = 'Python, Javascript (jQuery, React.js), Java, C/C++, HTML5 & CSS3 (Less CSS), AJAX, MySQL, PHP, C#, Lisp, Prolog, Computer Vision, Computer Graphics, WebGL, OpenGL';
+		return <div>
+		<div><div>{head1}</div><div>{par1}</div></div>
+		<div><div>{head2}</div><div>{par2}</div></div>
+		<div><div>{head3}</div><div>{par3}</div></div></div>;
+	}
+});
+
+var Contact = React.createClass({
+	render: function() {
+		var head1 = 'Phone'
+		var par1 = '872-203-2004';
+		var head2 = 'LinkedIn';
+		var par2 = 'https://www.linkedin.com/in/lingtingtseng'
+		var head3 = 'Github'
+		var par3 = 'https://github.com/frezmecritus/'
+		return <div>
+		<div><div>{head1}</div><div>{par1}</div></div>
+		<div><div>{head2}</div><div>{par2}</div></div>
+		<div><div>{head3}</div><div>{par3}</div></div></div>;
 	}
 });
 
