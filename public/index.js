@@ -43,8 +43,8 @@ var Canvas = React.createClass({
 		var page = this.state.currPage;
 		if (page=="WORK") 
 			res = <Lightbox 
-				pictures={['image/img1.png','image/img2.png','image/img3.png','image/img4.png']}
-				descriptions={['Street Accidents Prediction','Flying Airplane Navigation','Geospatial Data Visualization','WebGL Physics Simulation System']}
+				pictures={['image/img1.png','image/img2.png','image/img3.png','image/img4.png','image/img5.png','image/img6.png','image/img7.png','image/img8.png','image/img9.png']}
+				descriptions={['Street Accidents Prediction','WebGL Physics Simulation System','Geospatial Data Visualization','Big Lake Buoy','Medicare Service Platform','Power Hour','Flying Airplane Navigation','Le Petite Chef','OpenGL Transparency']}
 				keyboard 
 				controls={Controls}/>;
 		else if (page=="ABOUT")
@@ -63,14 +63,14 @@ var Canvas = React.createClass({
 				// ['image/img3.png','Geospatial Data Visualization'],['image/img4.png','WebGL Physics Simulation System']]}
 			// res = <div><div>
 			// 	<a><img src="image/img1.png"></img><div>Street Accidents Prediction</div></a>
-			// 	<a><img src="image/img4.png"></img><div>WebGL Physics Simulation System</div></a>
+			// 	<a><img src="image/img2.png"></img><div>WebGL Physics Simulation System</div></a>
 			// 	<a><img src="image/img3.png"></img><div>Geospatial Data Visualization</div></a>
 			// </div><div>
-			// 	<a><img src="image/img7.png"></img><div>Big Lake Buoy</div></a>
+			// 	<a><img src="image/img4.png"></img><div>Big Lake Buoy</div></a>
 			// 	<a><img src="image/img5.png"></img><div>Medicare Service Platform</div></a>
 			// 	<a><img src="image/img6.png"></img><div>Power Hour</div></a>
 			// </div><div>
-			// 	<a><img src="image/img2.png"></img><div>Flying Airplane Navigation</div></a>
+			// 	<a><img src="image/img7.png"></img><div>Flying Airplane Navigation</div></a>
 			// 	<a><img src="image/img8.png"></img><div>Le Petite Chef</div></a>
 			// 	<a><img src="image/img9.png"></img><div>OpenGL Transparency</div></a>
 			// </div></div>;
@@ -107,14 +107,3 @@ var Contact = React.createClass({
 
 const appRoot = document.getElementById('canvas');
 ReactDOM.render(<Canvas />, appRoot);
-// React.render(
-//   <Lightbox
-//     pictures={[
-//       'image/img1.png',
-//       'image/img2.png',
-//       'image/img3.png',
-//       'image/img4.png'
-//     ]}
-//     keyboard
-//     controls={Controls}/>
-// , appRoot);
