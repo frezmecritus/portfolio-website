@@ -42,9 +42,11 @@ var Canvas = React.createClass({
 		var res;
 		var page = this.state.currPage;
 		if (page=="WORK") 
-			res = <div><div>
-				<Lightbox pictures={['image/img1.png','image/img2.png','image/img3.png','image/img4.png']} keyboard controls={Controls}/>
-				</div></div>
+			res = <Lightbox 
+				pictures={['image/img1.png','image/img2.png','image/img3.png','image/img4.png']}
+				descriptions={['Street Accidents Prediction','Flying Airplane Navigation','Geospatial Data Visualization','WebGL Physics Simulation System']}
+				keyboard 
+				controls={Controls}/>;
 		else if (page=="ABOUT")
 			res = <About />;
 		else
@@ -57,6 +59,8 @@ var Canvas = React.createClass({
 		return <div id="footer"> Designed and developed by {author} @2016 </div>;
 	}
 });
+			// items={[['image/img1.png','Street Accidents Prediction'],['image/img2.png','Flying Airplane Navigation'],
+				// ['image/img3.png','Geospatial Data Visualization'],['image/img4.png','WebGL Physics Simulation System']]}
 			// res = <div><div>
 			// 	<a><img src="image/img1.png"></img><div>Street Accidents Prediction</div></a>
 			// 	<a><img src="image/img4.png"></img><div>WebGL Physics Simulation System</div></a>

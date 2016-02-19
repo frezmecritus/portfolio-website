@@ -185,29 +185,28 @@ var Lightbox = React.createClass({
 	closeCarousel: function () {
 		this.overlay.classList.remove('react-lightbox-overlay-open');
 	},
-	renderPictures: function (picture, index) {
-
-		if (typeof picture === 'string') {
-			return DOM.div({
+	renderPictures: function (item, index) {
+		return DOM.div({}, DOM.div({
 				key: index,
 				className: 'react-lightbox-image',
 				onClick: this.openCarousel.bind(this, index),
 				style: {
-					backgroundImage: 'url(' + picture + ')'
+					backgroundImage: 'url(' + item[0] + ')'
 				}
-			});
-		} else {
-			return DOM.div({
-				key: index,
-				className: 'react-lightbox-image',
-				onClick: this.openCarousel.bind(this, index)
-			}, picture);
-		}
-
+		}), DOM.div({},item[1]));
+	},
+	renderDes: function (item, index) {
+		return DOM.div({}, item[0]+item[1]);
 	},
 	render: function () {
 		return DOM.div({
 			className: 'react-lightbox'
-		}, (this.props.previews || this.props.pictures || []).map(this.renderPictures));
+		}, (zip([this.props.pictures,this.props.descriptions]) || []).map(this.renderPictures));
 	}
 })
+
+function zip(arrays) {
+    return arrays[0].map(function(_,i){
+        return arrays.map(function(array){return array[i]})
+    });
+}
