@@ -101,10 +101,9 @@ var Carousel = React.createFactory(React.createClass({
 				return DOM.div({
 					key: index,
 					className: this.createPictureClass(index),
-					style: {
-						visibility: this.state.previous === index || this.state.current === index ? 'visible' : 'hidden'
-					}
-				}, DOM.img({className: 'react-lightbox-carousel-image',src: picture}), DOM.div({}, 'adsfsdfafafafew'));
+					style: { visibility: this.state.previous === index || this.state.current === index ? 'visible' : 'hidden'}
+				}, DOM.div({}, DOM.img({className: 'react-lightbox-carousel-image',src: picture}), 
+				               DOM.div({}, 'adsfsdfafafafew')));
 			} else {
 				return DOM.div({
 					key: index,
@@ -202,7 +201,7 @@ var Lightbox = React.createClass({
 	render: function () {
 		return DOM.div({
 			className: 'react-lightbox'
-		}, (zip([this.props.pictures,this.props.descriptions]) || []).map(this.renderItems));
+		}, (zip([this.props.pictures,this.props.titles]) || []).map(this.renderItems));
 	}
 })
 

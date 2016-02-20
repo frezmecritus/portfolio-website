@@ -44,7 +44,7 @@ var Canvas = React.createClass({
 		if (page=="WORK") 
 			res = <Lightbox 
 				pictures={['image/img1.png','image/img2.png','image/img3.png','image/img4.png','image/img5.png','image/img6.png','image/img7.png','image/img8.png','image/img9.png']}
-				descriptions={['Street Accidents Prediction','WebGL Physics Simulation System','Geospatial Data Visualization','Big Lake Buoy','Medicare Service Platform','Power Hour','Flying Airplane Navigation','Le Petite Chef','OpenGL Transparency']}
+				titles={['Street Accidents Prediction','WebGL Physics Simulation System','Geospatial Data Visualization','Big Lake Buoy','Medicare Service Platform','Power Hour','Flying Airplane Navigation','Le Petite Chef','OpenGL Transparency']}
 				keyboard 
 				controls={Controls}/>;
 		else if (page=="ABOUT")

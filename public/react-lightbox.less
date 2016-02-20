@@ -7,6 +7,7 @@
 	height: 100%;
 	background: radial-gradient(ellipse at center, rgba(25,25,25,0.5) 0%,rgba(25,25,25,0.25) 100%);
 	transition: opacity 0.5s ease-in-out;
+	overflow: hidden;
 }
 
 .react-lightbox-overlay-open {
@@ -14,45 +15,45 @@
 }
 
 .react-lightbox-carousel-image {
-	position: absolute;
-	border-radius: 50%;
-	width: 300px;
-	height: 300px;
-	top:0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	margin: auto;
+	// position: absolute;
+	// border-radius: 50%;
+	width: 285px;
+	height: 182px;
+	// top:0;
+	// bottom: 0;
+	// left: 0;
+	// right: 0;
 	box-shadow: 0 0 40px rgba(25, 25, 25, 0.5);
 }
 .react-lightbox-carousel-item {
 	position: absolute;
-	border-radius: 50%;
-	width: 400px;
-	height: 400px;
+	border-radius: 1%;
+	width: 600px;
+	height: 450px;
 	top:0;
 	bottom: 0;
 	left: 0;
 	right: 0;
 	margin: auto;
-	background-size: cover;
-	transition: transform 0.25s ease-in, opacity 0.25s ease-in;
+	background-color: white;
+	transition: transform 0.20s ease-in, opacity 0.20s ease-in;
 	opacity: 1;
 	transform: translate3d(0, 0, 0);
 	box-shadow: 0 0 40px rgba(25, 25, 25, 0.5);
+	>div {margin: 10px;}
 }
 .react-lightbox-carousel-item-backward {
-	transform: translate3d(-400px, 0, 0);
+	transform: translate3d(-200px, 0, 0);
 	opacity: 0;
 }
 .react-lightbox-carousel-item-forward {
-	transform: translate3d(400px, 0, 0);
+	transform: translate3d(200px, 0, 0);
 	opacity: 0;
 }
 
 .my-controls {
 	position: absolute;
-	width: 600px;
+	width: 800px;
 	height: 100px;
 	text-align: center;
 	top:0;
