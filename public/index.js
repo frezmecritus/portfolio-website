@@ -1,6 +1,10 @@
+Parse.initialize("LM2XBZSm6OKoupNDIRkmzIeqXI5dmjW8d7WXUrD0", "yECtiYGHMAHAW5dXeNKVY3kCFMcMW3BZsUh9MUNl");
+
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup
 
 var Canvas = React.createClass({
+	mixins: [ParseReact.Mixin], // Enable query subscriptions
+
 	getInitialState: function() {
 		return { pages: ['WORK', 'ABOUT', 'CONTACT'], currPage: "WORK"};
 	},
@@ -11,6 +15,12 @@ var Canvas = React.createClass({
 
 	resetPage: function() {
 		this.setState({ currPage: this.state.pages[0] });
+	},
+
+	observe: function() {
+		// Subscribe to all Comment objects, ordered by creation date
+		// The results will be available at this.data.comments
+		return { projects: (new Parse.Query('Project')) };
 	},
 
 	render: function() {
@@ -42,7 +52,7 @@ var Canvas = React.createClass({
 		var res;
 		var page = this.state.currPage;
 		if (page=="WORK")
-			res = <Work />;
+			res = <Lightbox projects={this.data.projects} keyboard controls={Controls}/>;
 		else if (page=="ABOUT")
 			res = <About />;
 		else
@@ -56,25 +66,10 @@ var Canvas = React.createClass({
 	}
 });
 
-var Work = React.createClass({
-	mixins: [ParseReact.Mixin], // Enable query subscriptions
-
-	observe: function() {
-		// Subscribe to all Comment objects, ordered by creation date
-		// The results will be available at this.data.comments
-		return { projects: (new Parse.Query('Project')) };
-	},
-
-	render: function() {
-		// Render the text of each comment as a list item
-		return <Lightbox projects={this.data.projects} keyboard controls={Controls}/>;
-	}
-});
-
 var About = React.createClass({
 	render: function() {
 		var head1 = 'WHAT I DO';
-		var par1 = 'I am interested in frontend development, interactive design, computer graphic, geospatial data usage, with multiple projects on each of them. I have launched a marketplace in my senior year.';
+		var par1 = 'I am interested in frontend development, interactive design, computer graphic, geospatial data usage, with multiple projects on each of them. I have launched a event billboard in my senior year.';
 		var head2 = 'ACHIEVEMENTS';
 		var par2 = 'Chirpy, a campus event website my friends and I launched at 2012, has achieved more than 1000 viewers per day. It was also the official campus event website of several colleges in Taiwan.';
 		var head3 = 'SKILLS';
@@ -89,7 +84,7 @@ var About = React.createClass({
 var Contact = React.createClass({
 	render: function() {
 		var head1 = 'Phone'
-		var par1 = '872-203-2004';
+		var par1 = '415-323-9013';
 		var head2 = 'LinkedIn';
 		var par2 = 'https://www.linkedin.com/in/lingtingtseng'
 		var head3 = 'Github'

@@ -1,5 +1,3 @@
-Parse.initialize("LM2XBZSm6OKoupNDIRkmzIeqXI5dmjW8d7WXUrD0", "yECtiYGHMAHAW5dXeNKVY3kCFMcMW3BZsUh9MUNl");
-
 var DOM = React.DOM;
 
 var Carousel = React.createFactory(React.createClass({
@@ -205,9 +203,3 @@ var Lightbox = React.createClass({
 		}, (this.props.projects || []).map(this.renderItems));
 	}
 });
-
-function zip(arrays) {
-	return arrays[0].map(function(_,i){
-		return arrays.map(function(array){return array[i]})
-	});
-}
