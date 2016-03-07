@@ -14,17 +14,6 @@
 	opacity: 1;
 }
 
-.react-lightbox-carousel-image {
-	// position: absolute;
-	// border-radius: 50%;
-	width: 285px;
-	height: 182px;
-	// top:0;
-	// bottom: 0;
-	// left: 0;
-	// right: 0;
-	box-shadow: 0 0 40px rgba(25, 25, 25, 0.5);
-}
 .react-lightbox-carousel-item {
 	position: absolute;
 	border-radius: 1%;
@@ -40,7 +29,29 @@
 	opacity: 1;
 	transform: translate3d(0, 0, 0);
 	box-shadow: 0 0 40px rgba(25, 25, 25, 0.5);
-	>div {margin: 10px;}
+	>div {
+		margin: 10px;
+		>img {
+			// position: absolute;
+			// border-radius: 50%;
+			width: 350px;
+			height: 250px;
+			// top:0;
+			// bottom: 0;
+			// left: 0;
+			// right: 0;
+			box-shadow: 0 0 40px rgba(25, 25, 25, 0.5);
+		}
+		>div {
+			&:first-of-type{
+				position: absolute;
+				top: 35%;
+				left: 52%;
+				letter-spacing: 1px;
+				font-size: 20px;
+			}
+		}
+	}
 }
 .react-lightbox-carousel-item-backward {
 	transform: translate3d(-200px, 0, 0);

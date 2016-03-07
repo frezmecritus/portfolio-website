@@ -41,12 +41,8 @@ var Canvas = React.createClass({
 	renderContent: function() {
 		var res;
 		var page = this.state.currPage;
-		if (page=="WORK") 
-			res = <Lightbox 
-				pictures={['image/img1.png','image/img2.png','image/img3.png','image/img4.png','image/img5.png','image/img6.png','image/img7.png','image/img8.png','image/img9.png']}
-				titles={['Street Accidents Prediction','WebGL Physics Simulation System','Geospatial Data Visualization','Big Lake Buoy','Medicare Service Platform','Power Hour','Flying Airplane Navigation','Le Petite Chef','OpenGL Transparency']}
-				keyboard 
-				controls={Controls}/>;
+		if (page=="WORK")
+			res = <Work />;
 		else if (page=="ABOUT")
 			res = <About />;
 		else
@@ -57,6 +53,21 @@ var Canvas = React.createClass({
 	renderFooter: function() {
 		var author = <a href="https://github.com/frezmecritus/">frezmecritus</a>
 		return <div id="footer"> Designed and developed by {author} @2016 </div>;
+	}
+});
+
+var Work = React.createClass({
+	mixins: [ParseReact.Mixin], // Enable query subscriptions
+
+	observe: function() {
+		// Subscribe to all Comment objects, ordered by creation date
+		// The results will be available at this.data.comments
+		return { projects: (new Parse.Query('Project')) };
+	},
+
+	render: function() {
+		// Render the text of each comment as a list item
+		return <Lightbox projects={this.data.projects} keyboard controls={Controls}/>;
 	}
 });
 

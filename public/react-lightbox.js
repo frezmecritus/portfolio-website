@@ -1,3 +1,5 @@
+Parse.initialize("LM2XBZSm6OKoupNDIRkmzIeqXI5dmjW8d7WXUrD0", "yECtiYGHMAHAW5dXeNKVY3kCFMcMW3BZsUh9MUNl");
+
 var DOM = React.DOM;
 
 var Carousel = React.createFactory(React.createClass({
@@ -29,10 +31,10 @@ var Carousel = React.createFactory(React.createClass({
 		}
 	},
 	getNextIndex: function () {
-		return this.props.pictures.length === this.state.current + 1 ? 0 : this.state.current + 1;
+		return this.props.items.length === this.state.current + 1 ? 0 : this.state.current + 1;
 	},
 	getPreviousIndex: function () {
-		return this.state.current === 0 ? this.props.pictures.length - 1 : this.state.current - 1;
+		return this.state.current === 0 ? this.props.items.length - 1 : this.state.current - 1;
 	},
 	forward: function (event) {
 		if (event) {
@@ -95,15 +97,14 @@ var Carousel = React.createFactory(React.createClass({
 		return className += ' react-lightbox-carousel-item-backward';
 	},
 	renderPictures: function () {
-		return this.props.pictures.map(function (picture, index) {
+		return this.props.items.map(function (item, index) {
 
-			if (typeof picture === 'string') {
+			if (typeof item.img === 'string') {
 				return DOM.div({
 					key: index,
 					className: this.createPictureClass(index),
 					style: { visibility: this.state.previous === index || this.state.current === index ? 'visible' : 'hidden'}
-				}, DOM.div({}, DOM.img({className: 'react-lightbox-carousel-image',src: picture}), 
-				               DOM.div({}, 'adsfsdfafafafew')));
+				}, DOM.div({}, DOM.img({src: item.img}), DOM.div({}, item.title), DOM.div({}, item.description)));
 			} else {
 				return DOM.div({
 					key: index,
@@ -111,7 +112,7 @@ var Carousel = React.createFactory(React.createClass({
 					style: {
 						visibility: this.state.previous === index || this.state.current === index ? 'visible' : 'hidden'
 					}
-				}, picture);
+				}, item.img);
 			}
 		}, this);
 	},
@@ -168,7 +169,7 @@ var Lightbox = React.createClass({
 		this.overlay.className = 'react-lightbox-overlay';
 		document.body.appendChild(this.overlay);
 		React.render(Carousel({
-			pictures: this.props.pictures,
+			items: this.props.projects,
 			current: index,
 			keyboard: this.props.keyboard,
 			controls: this.props.controls,
@@ -183,30 +184,30 @@ var Lightbox = React.createClass({
 		this.overlay.classList.remove('react-lightbox-overlay-open');
 	},
 	renderItems: function (item, index) {
-		if (typeof item[0] === 'string') {
+		if (typeof item.img === 'string') {
 			return DOM.div({}, DOM.img({
 					key: index,
 					className: 'react-lightbox-image',
-					src: item[0],
+					src: item.img,
 					onClick: this.openCarousel.bind(this, index),
-			}), DOM.div({className: 'react-lightbox-description'},item[1]));
+			}), DOM.div({className: 'react-lightbox-description'},item.title));
 		} else {
 			return DOM.div({}, DOM.div({
 					key: index,
 					className: 'react-lightbox-image',
 					onClick: this.openCarousel.bind(this, index),
-			}, item[0]), DOM.div({className: 'react-lightbox-description'},item[1]));
+			}, item.img), DOM.div({className: 'react-lightbox-description'},item.title));
 		}
 	},
-	render: function () {
+	render: function() {
 		return DOM.div({
 			className: 'react-lightbox'
-		}, (zip([this.props.pictures,this.props.titles]) || []).map(this.renderItems));
+		}, (this.props.projects || []).map(this.renderItems));
 	}
-})
+});
 
 function zip(arrays) {
-    return arrays[0].map(function(_,i){
-        return arrays.map(function(array){return array[i]})
-    });
+	return arrays[0].map(function(_,i){
+		return arrays.map(function(array){return array[i]})
+	});
 }
