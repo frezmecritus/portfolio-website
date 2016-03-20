@@ -1,9 +1,22 @@
 Parse.initialize("LM2XBZSm6OKoupNDIRkmzIeqXI5dmjW8d7WXUrD0", "yECtiYGHMAHAW5dXeNKVY3kCFMcMW3BZsUh9MUNl");
 
-var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 var Canvas = React.createClass({
 	mixins: [ParseReact.Mixin], // Enable query subscriptions
+
+	observe: function() {
+		// Subscribe to all Comment objects, ordered by creation date
+		// The results will be available at this.data.comments
+		return { projects: (new Parse.Query('Project')) };
+	},
+
+	render: function() {
+		return <MainView projects={this.data.projects}/>;
+	}
+});
+
+var MainView = React.createClass({
 
 	getInitialState: function() {
 		return { pages: ['WORK', 'ABOUT', 'CONTACT'], currPage: "WORK"};
@@ -15,12 +28,6 @@ var Canvas = React.createClass({
 
 	resetPage: function() {
 		this.setState({ currPage: this.state.pages[0] });
-	},
-
-	observe: function() {
-		// Subscribe to all Comment objects, ordered by creation date
-		// The results will be available at this.data.comments
-		return { projects: (new Parse.Query('Project')) };
 	},
 
 	render: function() {
@@ -52,11 +59,13 @@ var Canvas = React.createClass({
 		var res;
 		var page = this.state.currPage;
 		if (page=="WORK")
-			res = <Lightbox projects={this.data.projects} keyboard controls={Controls}/>;
+			res = <Lightbox projects={this.props.projects} keyboard controls={Controls}/>;
 		else if (page=="ABOUT")
 			res = <About />;
-		else
+		else if (page=="CONTACT")
 			res = <Contact />;
+		else
+			res = <div>SOMETHING WENT WRONG!!!</div>;
 		return <section id="content"> {res} </section>;
 	},
 
@@ -67,32 +76,47 @@ var Canvas = React.createClass({
 });
 
 var About = React.createClass({
-	render: function() {
+	createIntro: function() {
+		var intro = 'A code addict and a lover in solving problem by programming. I worked in a project. I am currently looking for the positions of frontend or fullstack developer.'+
+		'Chirpy, an online campus event billboard I and my friends launched in our college years, is on a mission to facilitate the communication between students and event holders,' +
+		'Background'+
+		'After earning a Bachelor’s in Electrical Engineering from National Taiwan University,'+
+		'I love photography. I never stop grabbing every moment in my life no matter using phone, digital camera, or film camera. I am a basketball player too. Our team won the third place in a local tournament last year. Everyone on the team is supportive; I enjoy the time challenging on the opponents.';
+		// return intro;
+		return '';
+	},
+	createItems: function() {
 		var head1 = 'WHAT I DO';
 		var par1 = 'I am interested in frontend development, interactive design, computer graphic, geospatial data usage, with multiple projects on each of them. I have launched a event billboard in my senior year.';
 		var head2 = 'ACHIEVEMENTS';
 		var par2 = 'Chirpy, a campus event website my friends and I launched at 2012, has achieved more than 1000 viewers per day. It was also the official campus event website of several colleges in Taiwan.';
 		var head3 = 'SKILLS';
-		var par3 = 'Python, Javascript (jQuery, React.js), Java, C/C++, HTML5 & CSS3 (Less CSS), AJAX, MySQL, PHP, C#, Lisp, Prolog, Computer Vision, Computer Graphics, WebGL, OpenGL';
-		return <div>
-		<div><div>{head1}</div><div>{par1}</div></div>
-		<div><div>{head2}</div><div>{par2}</div></div>
-		<div><div>{head3}</div><div>{par3}</div></div></div>;
+		var par3 = 'Python, Javascript (jQuery, React.js), Java, C/C++, HTML5 & CSS3 (Less CSS), AJAX, MySQL, PHP, C#, Lisp, Prolog, Computer Vision, Computer Graphics, WebGL, OpenGL';	
+		return [[head1,par1],[head2,par2],[head3,par3]];
+	},
+	renderItems: function(item) {
+		return <div><div>{item[0]}</div><div>{item[1]}</div></div>;
+	},
+	render: function() {
+		return React.DOM.div({}, React.DOM.div({}, this.createIntro()), (this.createItems()).map(this.renderItems));
 	}
 });
 
 var Contact = React.createClass({
-	render: function() {
+	createItems: function() {
 		var head1 = 'Phone'
 		var par1 = '415-323-9013';
 		var head2 = 'LinkedIn';
-		var par2 = 'https://www.linkedin.com/in/lingtingtseng'
-		var head3 = 'Github'
-		var par3 = 'https://github.com/frezmecritus/'
-		return <div>
-		<div><div>{head1}</div><div>{par1}</div></div>
-		<div><div>{head2}</div><div>{par2}</div></div>
-		<div><div>{head3}</div><div>{par3}</div></div></div>;
+		var par2 = 'https://www.linkedin.com/in/lingtingtseng';
+		var head3 = 'Github';
+		var par3 = 'https://github.com/frezmecritus/';
+		return [[head1,par1],[head2,par2],[head3,par3]];
+	},
+	renderItems: function(item) {
+		return <div><div>{item[0]}</div><div>{item[1]}</div></div>;
+	},
+	render: function() {
+		return React.DOM.div({}, (this.createItems()).map(this.renderItems));
 	}
 });
 
