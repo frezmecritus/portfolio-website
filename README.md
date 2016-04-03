@@ -2,7 +2,7 @@
 
 The my portfolio website, built on React and Parse.
 
-- **Link: https://lingtingtseng.parseapp.com
+- Link: https://lingtingtseng.parseapp.com
 
 ## Influence / Credits
 
