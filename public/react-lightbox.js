@@ -1,6 +1,25 @@
+/**
+ * Create and define actions of lightbox by React.
+ * Modified from https://github.com/LaustAxelsen/react-lightbox
+ * @author Ling-Ting Tseng
+ */ 
+
 var DOM = React.DOM;
 
 var Carousel = React.createFactory(React.createClass({
+	/**
+	 * Carousel models a lightbox, which shows the details of a project. The
+	 *     content includes title, description, and images. Also, a control
+	 *     panel is provided for switching through projects by both mouse click
+	 *     and keyboard.
+	 * 
+	 * @param {items} The projects, with title, description, and image location.
+	 * @param {current} The index of the project being shown now.
+	 * @param {keyboard} Lightbox keyboard control.
+	 * @param {controls} Object of the control panel.
+	 * @param {close} The action of close event
+	 * @return {DOM.div} This DOM is a lightbox.
+	 */
 	getInitialState: function () {
 		return {
 			previous: null,
@@ -130,23 +149,43 @@ var Carousel = React.createFactory(React.createClass({
 }));
 
 var Controls = React.createClass({
+	/**
+	 * Controls models the control panel of a lightbox. The action is defined
+	 *     in Carousel.
+	 *
+	 * @param {forward, backward} This defines actions of onclick.
+	 * @return {DOM.div}
+	 */
 	render: function () {
-	return React.DOM.div({
-		className: 'my-controls'
-	}, 
-		React.DOM.div({
-		className: 'my-button my-button-left',
-		onClick: this.props.backward
-		}, '<'),
-		React.DOM.div({
-		className: 'my-button my-button-right',
-		onClick: this.props.forward
-		}, '>')
-	);
-}
+		return React.DOM.div({
+			className: 'my-controls'
+		}, 
+			React.DOM.div({
+				className: 'my-button my-button-left',
+				onClick: this.props.backward
+			}, '<'),
+			React.DOM.div({
+				className: 'my-button my-button-right',
+				onClick: this.props.forward
+			}, '>')
+		);
+	}
 });
 
 var Lightbox = React.createClass({
+	/**
+	 * Lightbox creates boxes of projects on WORK section. A box represents
+	 *     a project, which contains an image and its title.
+	 * 
+	 * Once you click a box, a lightbox, defined as Carousel, will pop out and
+	 *     shows the detailed description of that project.
+	 * 
+	 * @param {projects} An array of projects, containing title, description,
+	 *     and image location.
+	 * @param {keyboard} Keyboard control.
+	 * @param {controls} The control panel of a lightbox.
+	 * @return {DOM.div} This DOM contains boxes of projects.
+	 */
 	componentDidMount: function () {
 		this.overlay = document.createElement('div');
 		this.overlay.className = 'react-lightbox-overlay';
